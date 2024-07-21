@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class ThrowingTarget : MonoBehaviour
 {
+    /// <summary>
+    /// クリアしたかのフラグ
+    /// </summary>
+    public bool IsClear = false;
+
     // ①OnTrigerEnterを使って侵入判定を取得する。
     // ②上記メソッドの中で、自分のMeshRendererからマテリアルの色を取得し、赤色を代入する
     private void OnTriggerEnter(Collider other)
     {
         gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+        IsClear = true;
     }
 }

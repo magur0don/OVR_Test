@@ -5,7 +5,7 @@ using UnityEngine;
 public class RespawnCube : MonoBehaviour
 {
     // ‡@Vector3Œ^‚ÅCurrentPos‚Æ‚¢‚¤•Ï”‚ğéŒ¾‚µ‚Ä‚­‚¾‚³‚¢B
-    Vector3 CurrentPos;
+   private Vector3 CurrentPos;
 
     // Start is called before the first frame update
     void Start()
