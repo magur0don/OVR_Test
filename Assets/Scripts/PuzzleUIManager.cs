@@ -14,7 +14,6 @@ public class PuzzleUIManager : MonoBehaviour
 
     private void Update()
     {
-
-        ReturnCountTextMesh.text = $"3/3";
+        ReturnCountTextMesh.text = $"{PuzzleGameManager.GetReturnCount}/3";
     }
 }

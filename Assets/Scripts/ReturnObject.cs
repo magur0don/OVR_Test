@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ReturnObject : MonoBehaviour
 {
+
+    public PuzzleGameManager PuzzleGameManager;
+
     // ‡@OnTrigerEnter‚ğg‚Á‚ÄN“ü”»’è‚ğæ“¾‚·‚éB
     private void OnTriggerEnter(Collider other)
     {
@@ -18,6 +21,8 @@ public class ReturnObject : MonoBehaviour
 
         // ‡C©•ª‚ÌMeshRenderer‚Ìenabled‚ğƒIƒt‚É‚·‚é
         this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+        PuzzleGameManager.Return();
     }
 
 
