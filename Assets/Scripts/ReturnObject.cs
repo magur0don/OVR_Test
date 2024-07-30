@@ -18,6 +18,11 @@ public class ReturnObject : MonoBehaviour
     /// </summary>
     private bool isSnapped = false;
 
+    /// <summary>
+    /// スナップしたときのエフェクト
+    /// </summary>
+    public ParticleSystem SnappedEffect;
+
     private void Start()
     {
         myCollider = GetComponent<Collider>();
@@ -30,7 +35,8 @@ public class ReturnObject : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // すでにスナップされていたら以下の処理はしない
-        if (isSnapped) {
+        if (isSnapped) 
+        {
             return;
         }
 
@@ -53,6 +59,9 @@ public class ReturnObject : MonoBehaviour
             this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             PuzzleGameManager.Return();
             isSnapped = true;
+
+            // エフェクトをプレイする
+            SnappedEffect.Play();
         }
     }
 }
