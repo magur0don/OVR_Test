@@ -7,6 +7,10 @@ public class RockPaperScissorsStateManager : MonoBehaviour
 
     public RockPaperScissorsManager mainGameManager;
 
+    public AudioSource AudioSource;
+
+    public AudioClip[] resultSE = new AudioClip[2];
+
     /// <summary>
     /// ゲームの進行度
     /// </summary>
@@ -29,7 +33,7 @@ public class RockPaperScissorsStateManager : MonoBehaviour
                 gameState = GameState.GameStart;
                 break;
             case GameState.GameStart:
-                mainGameManager.PlayerHand 
+                mainGameManager.PlayerHand
                     = RockPaperScissorsManager.RockPaperScissors.Invalide;
                 mainGameManager.SetText("Rock-Paper-Scissors!!");
                 // 待ち時間を減らしていく
@@ -98,6 +102,9 @@ public class RockPaperScissorsStateManager : MonoBehaviour
                         mainGameManager.SetText("You Win!!");
                         // 勝利カウントを増やす
                         mainGameManager.WinCount++;
+                        // 勝利音を鳴らす
+                        AudioSource.clip = resultSE[0];
+                        AudioSource.Play();
                         break;
 
                     case RockPaperScissorsManager.HandResults.Draw:
@@ -106,6 +113,9 @@ public class RockPaperScissorsStateManager : MonoBehaviour
 
                     case RockPaperScissorsManager.HandResults.Lose:
                         mainGameManager.SetText("You Lose...");
+                        // 負けの音を鳴らす
+                        AudioSource.clip = resultSE[1];
+                        AudioSource.Play();
                         break;
                 }
                 break;
