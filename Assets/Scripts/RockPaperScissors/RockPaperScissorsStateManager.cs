@@ -7,8 +7,14 @@ public class RockPaperScissorsStateManager : MonoBehaviour
 
     public RockPaperScissorsManager mainGameManager;
 
+    /// <summary>
+    /// 音を鳴らすコンポーネント
+    /// </summary>
     public AudioSource AudioSource;
 
+    /// <summary>
+    /// 結果のSE
+    /// </summary>
     public AudioClip[] resultSE = new AudioClip[2];
 
     /// <summary>
@@ -19,7 +25,8 @@ public class RockPaperScissorsStateManager : MonoBehaviour
         Invalide,
         GameStart,
         GameMain,
-        GameEnd
+        GameEnd,
+        GameResult
     }
 
     GameState gameState = GameState.Invalide;
@@ -91,6 +98,9 @@ public class RockPaperScissorsStateManager : MonoBehaviour
                     ((int)mainGameManager.PlayerHand - (int)mainGameManager.CPUHand + 3) % 3;
                     mainGameManager.HandResult = (RockPaperScissorsManager.HandResults)result;
 
+                    // 結果が出たのでプレイカウントを増やす
+                    mainGameManager.PlayCount++;
+
                     gameState = GameState.GameEnd;
                 }
 
@@ -118,6 +128,32 @@ public class RockPaperScissorsStateManager : MonoBehaviour
                         AudioSource.Play();
                         break;
                 }
+                gameState = GameState.GameResult;
+
+                break;
+            case GameState.GameResult:
+                mainGameManager.WaitTime -= Time.deltaTime;
+                if (mainGameManager.WaitTime < 0)
+                {
+                    mainGameManager.WaitTime = 2f;
+
+                    if (!mainGameManager.GameEnd())
+                    {
+                        gameState = GameState.GameStart;
+                    }
+                    else
+                    {
+                        if (mainGameManager.GameWin())
+                        {
+                            mainGameManager.SetText("You Win!!");
+                        }
+                        else
+                        {
+                            mainGameManager.SetText("You Lose...");
+                        }
+                    }
+                }
+
                 break;
         }
     }

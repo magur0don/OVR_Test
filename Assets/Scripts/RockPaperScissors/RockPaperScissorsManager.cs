@@ -10,6 +10,11 @@ public class RockPaperScissorsManager : MonoBehaviour
     public TextMeshProUGUI GameText;
 
     /// <summary>
+    /// グーチョキパーのPrefab達
+    /// </summary>
+    public GameObject[] RockPaperScissorsHand = new GameObject[3];
+
+    /// <summary>
     /// じゃんけんの判定
     /// </summary>
     public enum RockPaperScissors
@@ -48,10 +53,11 @@ public class RockPaperScissorsManager : MonoBehaviour
     /// 勝負の待ち時間
     /// </summary>
     public float JudgeTime = 2f;
+
     /// <summary>
     /// 勝負回数
     /// </summary>
-    private int judgeCount = 1;
+    public int JudgeCount = 3;
 
     /// <summary>
     /// プレイヤーが遊んだカウント
@@ -91,6 +97,18 @@ public class RockPaperScissorsManager : MonoBehaviour
     {
         int judgeNo = UnityEngine.Random.Range(0, 3);
         CPUHand = (RockPaperScissors)judgeNo;
+        for (int i = 0; i < 3; i++)
+        {
+            if (i == judgeNo)
+            {
+                RockPaperScissorsHand[i].SetActive(true);
+            }
+            else
+            {
+                RockPaperScissorsHand[i].SetActive(false);
+
+            }
+        }
     }
 
     /// <summary>
@@ -99,7 +117,7 @@ public class RockPaperScissorsManager : MonoBehaviour
     /// <returns></returns>
     public bool GameEnd()
     {
-        return PlayCount == judgeCount;
+        return PlayCount == JudgeCount;
     }
 
     /// <summary>
@@ -109,7 +127,7 @@ public class RockPaperScissorsManager : MonoBehaviour
     public bool GameWin()
     {
         // 勝率5割を超えていたらtrueを返す
-        if (WinCount / judgeCount > 0.5f)
+        if (WinCount / JudgeCount > 0.5f)
         {
             return true;
         }
