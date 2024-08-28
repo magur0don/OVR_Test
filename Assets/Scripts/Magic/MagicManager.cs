@@ -7,19 +7,25 @@ public class MagicManager : MonoBehaviour
     //① public修飾子でGameObect型の変数MagicObjectを作成します。
     public GameObject MagicObject;
 
+    // ※右手のTransform
     public Transform RightHand = null;
 
-    public Vector3 forwradOffset = new Vector3(-0.4f,0,0);
+    // ※オフセット(距離の差分)
+    public Vector3 OffsetPosition = Vector3.zero;
+    public Vector3 OffsetEulerAngles= Vector3.zero;
 
     //② public void型でGameObjectのSetActiveをtrueにする任意の名前のメソッドを作成する
     public void MagicActive()
     {
         if (RightHand != null)
         {
-            MagicObject.transform.parent = RightHand;
-            MagicObject.transform.localPosition = forwradOffset;
+            // MagicObjectをRightHandの位置に合わせて配置し、オフセットも反映させる
+            MagicObject.transform.position = RightHand.position + OffsetPosition;
+            // 回転をRightHandに追従させる
+            MagicObject.transform.rotation = RightHand.rotation;
+            // 回転値のオフセットを反映させる
+            MagicObject.transform.eulerAngles += OffsetEulerAngles;
         }
-
         MagicObject.SetActive(true);
     }
 

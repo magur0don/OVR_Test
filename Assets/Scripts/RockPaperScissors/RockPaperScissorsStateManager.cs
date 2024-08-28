@@ -34,6 +34,13 @@ public class RockPaperScissorsStateManager : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            AudioSource.clip = resultSE[0];
+            AudioSource.Play();
+        }
+
         switch (gameState)
         {
             case GameState.Invalide:

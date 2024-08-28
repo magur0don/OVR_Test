@@ -1122,7 +1122,7 @@ GameObject:
   - component: {fileID: 1151269680}
   - component: {fileID: 1151269679}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: MagicManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1141,8 +1141,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MagicObject: {fileID: 1029687348}
-  RightHand: {fileID: 550214427}
-  forwradOffset: {x: 0, y: 0, z: 0.5}
+  RightHand: {fileID: 1558185641}
+  OffsetPosition: {x: -0.1, y: -0.2, z: 0}
+  OffsetEulerAngles: {x: 0, y: 0, z: 180}
 --- !u!4 &1151269680
 Transform:
   m_ObjectHideFlags: 0
