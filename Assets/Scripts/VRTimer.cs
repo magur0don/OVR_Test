@@ -12,7 +12,7 @@ public class VRTimer : MonoBehaviour
     /// <summary>
     /// 制限時間
     /// </summary>
-    private float limitTime = 60f;
+    private float limitTime = 30f;
 
     // limitTimeのアクセサ
     public float GetLimitTime
@@ -42,5 +42,10 @@ public class VRTimer : MonoBehaviour
             limitTime -= Time.deltaTime;
         }
         TimerTextMesh.text = limitTime.ToString("F2");
+    }
+
+    public void HideText()
+    {
+        TimerTextMesh.gameObject.SetActive(false);
     }
 }
